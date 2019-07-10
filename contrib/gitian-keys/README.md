@@ -23,5 +23,4 @@ fingerprints of the primary keys into gpg:
 while read fingerprint keyholder_name; do gpg --keyserver hkp://subset.pool.sks-keyservers.net --recv-keys ${fingerprint}; done < ./keys.txt
 ```
 
-Add your key to the list if you provided Gitian signatures for two major or
-minor releases of Bitcoin Core.
+Add your key to the list if you provided Gitian signatures for two major or minor releases of Donu.
