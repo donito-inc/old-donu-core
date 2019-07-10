@@ -1,0 +1,20 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/donu_bg.qm</file>
+        <file alias="de">locale/donu_de.qm</file>
+        <file alias="en">locale/donu_en.qm</file>
+        <file alias="es">locale/donu_es.qm</file>
+        <file alias="fi">locale/donu_fi.qm</file>
+        <file alias="fr">locale/donu_fr.qm</file>
+        <file alias="it">locale/donu_it.qm</file>
+        <file alias="ja">locale/donu_ja.qm</file>
+        <file alias="pl">locale/donu_pl.qm</file>
+        <file alias="pt">locale/donu_pt.qm</file>
+        <file alias="ru">locale/donu_ru.qm</file>
+        <file alias="sk">locale/donu_sk.qm</file>
+        <file alias="sv">locale/donu_sv.qm</file>
+        <file alias="vi">locale/donu_vi.qm</file>
+        <file alias="zh_CN">locale/donu_zh_CN.qm</file>
+        <file alias="zh_TW">locale/donu_zh_TW.qm</file>
+    </qresource>
+</RCC>

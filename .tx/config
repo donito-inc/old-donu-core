@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[bitcoin.qt-translation-017x]
+file_filter = src/qt/locale/donu<lang>.ts
+source_file = src/qt/locale/donu.ts
+source_lang = en
