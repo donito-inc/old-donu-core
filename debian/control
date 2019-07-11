@@ -1,0 +1,72 @@
+Source: donu
+Section: utils
+Priority: optional
+Maintainer: Ahmed Bodiwala <admin@multicoin.co>
+Uploaders: Ahmed Bodiwala <admin@multicoin.co>
+Build-Depends: debhelper,
+ devscripts,
+ automake,
+ libtool,
+ bash-completion,
+ libdb4.8++-dev,
+ libssl-dev,
+ pkg-config,
+ libevent-dev,
+ libboost-system1.48-dev | libboost-system-dev (>> 1.47),
+ libboost-filesystem1.48-dev | libboost-filesystem-dev (>> 1.47),
+ libboost-program-options1.48-dev | libboost-program-options-dev (>> 1.47),
+ libboost-thread1.48-dev | libboost-thread-dev (>> 1.47),
+ libboost-test1.48-dev | libboost-test-dev (>> 1.47),
+ libboost-chrono1.48-dev | libboost-chrono-dev (>> 1.47),
+ libminiupnpc8-dev | libminiupnpc-dev,
+ qt4-qmake, libqt4-dev,
+ xvfb,
+ qttools5-dev-tools, qttools5-dev,
+ libqrencode-dev,
+ libprotobuf-dev, protobuf-compiler,
+ python,
+ libzmq3-dev,
+ dh-systemd
+Standards-Version: 3.9.2
+Homepage: https://donucore.org/
+Vcs-Git: git://github.com/donu/donu.git
+Vcs-Browser: https://github.com/donu/donu
+
+Package: donud
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, adduser
+Description: peer-to-peer network based digital currency - daemon
+ donu is a free open source peer-to-peer electronic cash system that
+ is completely decentralized, without the need for a central server or
+ trusted parties.  Users hold the crypto keys to their own money and
+ transact directly with each other, with the help of a P2P network to
+ check for double-spending.
+ .
+ This package provides the daemon, donud, and the CLI tool
+ donu-cli to interact with the daemon.
+
+Package: donu-qt
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer network based digital currency - Qt GUI
+ donu is a free open source peer-to-peer electronic cash system that
+ is completely decentralized, without the need for a central server or
+ trusted parties.  Users hold the crypto keys to their own money and
+ transact directly with each other, with the help of a P2P network to
+ check for double-spending.
+ .
+ This package provides donu-Qt, a GUI for donu based on Qt.
+
+Package: donu-tx
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer digital currency - standalone transaction tool
+ donu is a free open source peer-to-peer electronic cash system that
+ is completely decentralized, without the need for a central server or
+ trusted parties.  Users hold the crypto keys to their own money and
+ transact directly with each other, with the help of a P2P network to
+ check for double-spending.
+ .
+ This package provides donu-tx, a command-line transaction creation
+ tool which can be used without a donu daemon.  Some means of
+ exchanging minimal transaction data with peers is still required.
