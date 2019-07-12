@@ -117,10 +117,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000000000000");
+        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000000250025");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0000000000000000000000000000000000000000000000000000000000000000");
+        consensus.defaultAssumeValid = uint256S("ef5cd80331c5c118cb7cc4daf1d13462b8c5cf630be5c9586beeef6509a507f2");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -173,11 +173,13 @@ public:
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
             (  0, uint256S("0x5f7f26e24291f5be2351e1dcdab18bf94cee718940e6b9f2fbb46227434c3f12"))
+            (  3, uint256S("0xcd8510ef78d9ee45c70b73fe9ed50cc4c5d9989991f42010533d9ccbb88a75a9"))
+            (  5, uint256S("0x4084bbb04f01439905553022116c26f2195ee8e9c3df0360ecbfe37909573333"))
         };
 
         chainTxData = ChainTxData{
-            1559882564, // * UNIX timestamp of last known number of transactions
-            1,    // * total number of transactions between genesis and that timestamp
+            1562885753, // * UNIX timestamp of last known number of transactions
+            6,    // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
             0.1         // * estimated number of transactions per second after that timestamp
         };
