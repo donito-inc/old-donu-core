@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"org.bitcoinfoundation.DONU-Qt";
+        return @"org.donitoinc.Donu-Qt";
     } else {
         return [self __bundleIdentifier];
     }

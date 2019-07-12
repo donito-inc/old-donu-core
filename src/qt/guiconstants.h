@@ -49,8 +49,8 @@ static const int MAX_URI_LENGTH = 255;
 
 #define QAPP_ORG_NAME "DONU"
 #define QAPP_ORG_DOMAIN "donu.io"
-#define QAPP_APP_NAME_DEFAULT "DONU-Qt"
-#define QAPP_APP_NAME_TESTNET "DONU-Qt-testnet"
-#define QAPP_APP_NAME_REGTEST "DONU-Qt-regtest"
+#define QAPP_APP_NAME_DEFAULT "Donu-Qt"
+#define QAPP_APP_NAME_TESTNET "Donu-Qt-testnet"
+#define QAPP_APP_NAME_REGTEST "Donu-Qt-regtest"
 
 #endif // BITCOIN_QT_GUICONSTANTS_H
