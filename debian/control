@@ -28,9 +28,9 @@ Build-Depends: debhelper,
  libzmq3-dev,
  dh-systemd
 Standards-Version: 3.9.2
-Homepage: https://donucore.org/
-Vcs-Git: git://github.com/donu/donu.git
-Vcs-Browser: https://github.com/donu/donu
+Homepage: https://donu.io/
+Vcs-Git: git://github.com/donito-inc/donu-core.git
+Vcs-Browser: https://github.com/donito-inc/donu-core
 
 Package: donud
 Architecture: any
