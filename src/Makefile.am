@@ -394,6 +394,10 @@ crypto_libdonu_crypto_base_a_SOURCES = \
   crypto/sph_sha2.h \
   crypto/sph_haval.h \
   crypto/sph_tiger.h \
+  crypto/sph_hamsi.h \
+  crypto/sph_fugue.h \
+  crypto/sph_shabal.h \
+  crypto/sph_whirlpool.h \
   crypto/lyra2.h \
   crypto/sponge.h \
   crypto/gost_streebog.h \
