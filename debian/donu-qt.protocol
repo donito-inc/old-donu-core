@@ -1,6 +1,6 @@
 [Protocol]
-exec=bitcoin-qt '%u'
-protocol=bitcoin
+exec=donu-qt '%u'
+protocol=donu
 input=none
 output=none
 helper=true
