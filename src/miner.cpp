@@ -210,23 +210,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CWallet *wallet, 
 
         if (!fStakeFound)
             return nullptr;
-    } else if (!fProofOfStake && nHeight <= Params().GetConsensus().nFirstPoSBlock) {
-        // POW Miner Pre-Pos
-        coinbaseTx.vout.resize(2);
-        // Resize outputs
-        // 0: Miner
-        // 1: Masternode
-        // 2: Dev Fee
-    
-        coinbaseTx.vout[0].nValue = blockReward + nFees;
-        coinbaseTx.vout[0].scriptPubKey = PlatformScript();
-        coinbaseTx.vout[1].nValue = Params().GetEmissionsAmount();
-        coinbaseTx.vout[1].scriptPubKey = PlatformScript();
-        LogPrintf("CreateNewBlock() : fPoW Pre-Pos. Coinbase: %s", coinbaseTx.ToString().c_str());
-    } else if (!fProofOfStake && nHeight > Params().GetConsensus().nFirstPoSBlock) {
-        // POW Miner Pre-Pos
-        LogPrintf("CreateNewBlock() : !fProofOfStake && nHeight > Params().GetConsensus().nFirstPoSBlock \n");
-
+    } else {
 	bool hasPayment = true;
 	CScript payee;
 
@@ -255,24 +239,19 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CWallet *wallet, 
             // 0: Miner
             // 1: Masternode
             // 2: Dev Fee
-            coinbaseTx.vout[0].nValue = blockReward - masternodePayment;
-            coinbaseTx.vout[0].scriptPubKey = scriptPubKeyIn;
+            coinbaseTx.vout[0].nValue = blockReward + nFees - masternodePayment;
+            coinbaseTx.vout[0].scriptPubKey = PlatformScript();
             coinbaseTx.vout[1].nValue = masternodePayment;
 	    coinbaseTx.vout[1].scriptPubKey = payee;
             coinbaseTx.vout[2].nValue = Params().GetEmissionsAmount();
             coinbaseTx.vout[2].scriptPubKey = PlatformScript();
 
-            CTxDestination address1;
-            ExtractDestination(payee, address1);
-            CDONUAddress address2(address1);
-            LogPrintf("CreateNewBlock::FillBlockPayee -- Masternode payment %lld to %s\n", masternodePayment, EncodeDestination(address1));
         } else {
             // POW Miner Pre-Pos
             coinbaseTx.vout.resize(2);
             // Resize outputs
             // 0: Miner
-            // 1: Masternode
-            // 2: Dev Fee
+            // 1: Dev Fee
 
             coinbaseTx.vout[0].nValue = blockReward + nFees;
             coinbaseTx.vout[0].scriptPubKey = PlatformScript();
