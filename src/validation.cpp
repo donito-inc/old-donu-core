@@ -2031,20 +2031,13 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
 
     // DONU : MODIFIED TO CHECK MASTERNODE PAYMENTS AND SUPERBLOCKS
 
-    // Platform emissions
-    int64_t platformEmissionsAmt = 0;
-
-    if (chainActive.Height() > 0) {
-      platformEmissionsAmt = Params().GetEmissionsAmount();
-    }
-
     // It's possible that we simply don't have enough data and this could fail
     // (i.e. block itself could be a correct one and we need to store it),
     // that's why this is in ConnectBlock. Could be the other way around however -
     // the peer who sent us this block is missing some data and wasn't able
     // to recognize that block is actually invalid.
     // TODO: resync data (both ways?) and try to reprocess this block later.
-    CAmount expectedReward = GetBlockSubsidy(pindex->pprev->nHeight, chainparams.GetConsensus()) + platformEmissionsAmt;
+    CAmount expectedReward = GetBlockSubsidy(pindex->pprev->nHeight, chainparams.GetConsensus());
 
     std::string strError = "";
     if (!IsBlockValueValid(block, pindex->nHeight, expectedReward, pindex->nMint, strError)) {
