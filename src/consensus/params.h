@@ -78,6 +78,7 @@ struct Params {
     int64_t nTargetSpacing;
     int64_t nTargetTimespan;
     int nFirstPoSBlock;
+    int nGMPForkHeight;
     int64_t DifficultyAdjustmentInterval() const { return nTargetTimespan / nTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;

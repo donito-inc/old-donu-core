@@ -102,6 +102,9 @@ public:
         consensus.nRuleChangeActivationThreshold = 1080;
         consensus.nMinerConfirmationWindow = 1440;
 
+	// Hard fork to correct GetMasternodePayment
+	consensus.nGMPForkHeight = 47949;
+
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = Consensus::BIP9Deployment::ALWAYS_ACTIVE;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = Consensus::BIP9Deployment::NO_TIMEOUT;

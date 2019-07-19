@@ -1550,8 +1550,20 @@ bool static ProcessHeadersMessage(CNode *pfrom, CConnman *connman, const std::ve
 
 bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStream& vRecv, int64_t nTimeReceived, const CChainParams& chainparams, CConnman* connman, const std::atomic<bool>& interruptMsgProc)
 {
+
+    if (chainActive.Height() + 1 >= chainparams.GetConsensus().nGMPForkHeight && pfrom->nVersion > INIT_PROTO_VERSION && pfrom->nVersion <= PREFORK_PROTO_VERSION)
+    {
+        // disconnect from peers older than this proto version
+        LogPrint(BCLog::NET, "peer=%d using obsolete version %i; disconnecting\n", pfrom->GetId(), pfrom->nVersion);
+        connman->PushMessage(pfrom, CNetMsgMaker(INIT_PROTO_VERSION).Make(NetMsgType::REJECT, strCommand, REJECT_OBSOLETE,
+                                                                          strprintf("Version must be %d or greater", MIN_PEER_PROTO_VERSION)));
+        Misbehaving(pfrom->GetId(), 100, "Old Peer");
+        pfrom->fDisconnect = true;
+        return false;
+    }
+
 //    if(strCommand != "mnp" && strCommand != "inv")
-    LogPrint(BCLog::NET, "received: %s (%u bytes) peer=%d\n", SanitizeString(strCommand), vRecv.size(), pfrom->GetId());
+    LogPrint(BCLog::NET, "received: %s Version: %s (%u bytes) peer=%d\n", SanitizeString(strCommand), pfrom->nVersion, vRecv.size(), pfrom->GetId());
     if (gArgs.IsArgSet("-dropmessagestest") && GetRand(gArgs.GetArg("-dropmessagestest", 0)) == 0)
     {
         LogPrintf("dropmessagestest DROPPING RECV MESSAGE\n");
@@ -3984,7 +3996,7 @@ void net_processing_bitcoin::ThreadProcessExtensions(CConnman *pConnman)
     fOneThread = true;
 
     // Make this thread recognisable as the PrivateSend thread
-    RenameThread("bitcoin-ps");
+    RenameThread("donu-ps");
 
     unsigned int nTick = 0;
 
