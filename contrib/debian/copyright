@@ -41,9 +41,9 @@ Files: src/qt/res/icons/add.png
        src/qt/res/icons/open.png
        src/qt/res/icons/overview.png
        src/qt/res/icons/quit.png
-       src/qt/res/icons/receive.png
+       src/qt/res/icons/breceive.png
        src/qt/res/icons/remove.png
-       src/qt/res/icons/send.png
+       src/qt/res/icons/bsend.png
        src/qt/res/icons/synced.png
        src/qt/res/icons/transaction*.png
        src/qt/res/icons/tx_output.png
@@ -76,8 +76,8 @@ Comment:
 
 Files: src/qt/res/icons/clock*.png
        src/qt/res/icons/eye_*.png
-       src/qt/res/icons/tx_in*.png
        src/qt/res/icons/verify.png
+       src/qt/res/icons/tx_in*.png
        src/qt/res/src/clock_*.svg
        src/qt/res/src/tx_*.svg
        src/qt/res/src/verify.svg
@@ -98,6 +98,22 @@ Files: src/qt/res/icons/proxy.png
 Copyright: Cristian Mircea Messel
 Licese: public-domain
 
+Files: src/qt/res/icons/send.png
+       src/qt/res/icons/receive.png
+       src/qt/res/icons/history.png
+       src/qt/res/icons/history_active.png
+       src/qt/res/icons/masternodes.png
+       src/qt/res/icons/masternodes_active.png
+       src/qt/res/icons/overview.png
+       src/qt/res/icons/overview_active.png
+       src/qt/res/icons/receive.png
+       src/qt/res/icons/receive_active.png
+       src/qt/res/icons/send.png
+       src/qt/res/icons/send_active.png
+
+Copyright: Donito, Inc.
+License: public-domain
+Comment: Site: www.donu.io
 
 License: Expat
  Permission is hereby granted, free of charge, to any person obtaining a
