@@ -49,7 +49,6 @@ QIcon ColorizeIcon(const QIcon& ico, const QColor& colorbase)
     for (const QSize& sz : ico.availableSizes())
     {
         QImage img(ico.pixmap(sz).toImage());
-        MakeSingleColorImage(img, colorbase);
         new_ico.addPixmap(QPixmap::fromImage(img));
     }
     return new_ico;
