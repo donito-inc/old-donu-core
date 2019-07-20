@@ -473,7 +473,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>donu-core</name>
     <message>
         <source>Information</source>
         <translation>Información</translation>

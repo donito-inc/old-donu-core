@@ -50,7 +50,7 @@ namespace GUIUtil
     // Set up widget for address
     void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent);
 
-    // Parse "bitcoin:" URI into recipient object, return true on successful parsing
+    // Parse "donu:" URI into recipient object, return true on successful parsing
     bool parseDONUURI(const QUrl &uri, SendCoinsRecipient *out);
     bool parseDONUURI(QString uri, SendCoinsRecipient *out);
     QString formatDONUURI(const SendCoinsRecipient &info);

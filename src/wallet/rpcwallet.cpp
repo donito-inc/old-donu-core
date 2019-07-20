@@ -157,7 +157,7 @@ static UniValue getnewaddress(const JSONRPCRequest& request)
                 "1. \"label\"          (string, optional) The label name for the address to be linked to. If not provided, the default label \"\" is used. It can also be set to the empty string \"\" to represent the default label. The label does not need to exist, it will be created if there is no label by the given name.\n"
                 "2. \"address_type\"   (string, optional) The address type to use. Options are \"legacy\", \"p2sh-segwit\", and \"bech32\". Default is set by -addresstype.\n"
                 "\nResult:\n"
-                "\"address\"    (string) The new bitcoin address\n"
+                "\"address\"    (string) The new donu address\n"
                 "\nExamples:\n"
                 + HelpExampleCli("getnewaddress", "")
                 + HelpExampleRpc("getnewaddress", "")
@@ -213,9 +213,9 @@ static UniValue getlabeladdress(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("accounts") && request.strMethod == "getaccountaddress") {
         if (request.fHelp) {
-            throw std::runtime_error("getaccountaddress (Deprecated, will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts)");
+            throw std::runtime_error("getaccountaddress (Deprecated, will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts)");
         }
-        throw JSONRPCError(RPC_METHOD_DEPRECATED, "getaccountaddress is deprecated and will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts.");
+        throw JSONRPCError(RPC_METHOD_DEPRECATED, "getaccountaddress is deprecated and will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts.");
     }
 
     if (request.fHelp || request.params.size() < 1 || request.params.size() > 2)
@@ -319,9 +319,9 @@ static UniValue setlabel(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("accounts") && request.strMethod == "setaccount") {
         if (request.fHelp) {
-            throw std::runtime_error("setaccount (Deprecated, will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts)");
+            throw std::runtime_error("setaccount (Deprecated, will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts)");
         }
-        throw JSONRPCError(RPC_METHOD_DEPRECATED, "setaccount is deprecated and will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts.");
+        throw JSONRPCError(RPC_METHOD_DEPRECATED, "setaccount is deprecated and will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts.");
     }
 
     if (request.fHelp || request.params.size() != 2)
@@ -329,11 +329,11 @@ static UniValue setlabel(const JSONRPCRequest& request)
                 "setlabel \"address\" \"label\"\n"
                 "\nSets the label associated with the given address.\n"
                 "\nArguments:\n"
-                "1. \"address\"         (string, required) The bitcoin address to be associated with a label.\n"
+                "1. \"address\"         (string, required) The donu address to be associated with a label.\n"
                 "2. \"label\"           (string, required) The label to assign to the address.\n"
                 "\nExamples:\n"
-                + HelpExampleCli("setlabel", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\" \"tabby\"")
-                + HelpExampleRpc("setlabel", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\", \"tabby\"")
+                + HelpExampleCli("setlabel", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\" \"tabby\"")
+                + HelpExampleRpc("setlabel", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\", \"tabby\"")
                 );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -373,9 +373,9 @@ static UniValue getaccount(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("accounts")) {
         if (request.fHelp) {
-            throw std::runtime_error("getaccount (Deprecated, will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts)");
+            throw std::runtime_error("getaccount (Deprecated, will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts)");
         }
-        throw JSONRPCError(RPC_METHOD_DEPRECATED, "getaccount is deprecated and will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts.");
+        throw JSONRPCError(RPC_METHOD_DEPRECATED, "getaccount is deprecated and will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts.");
     }
 
     if (request.fHelp || request.params.size() != 1)
@@ -383,12 +383,12 @@ static UniValue getaccount(const JSONRPCRequest& request)
                 "getaccount \"address\"\n"
                 "\nDEPRECATED. Returns the account associated with the given address.\n"
                 "\nArguments:\n"
-                "1. \"address\"         (string, required) The bitcoin address for account lookup.\n"
+                "1. \"address\"         (string, required) The donu address for account lookup.\n"
                 "\nResult:\n"
                 "\"accountname\"        (string) the account address\n"
                 "\nExamples:\n"
-                + HelpExampleCli("getaccount", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\"")
-                + HelpExampleRpc("getaccount", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\"")
+                + HelpExampleCli("getaccount", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\"")
+                + HelpExampleRpc("getaccount", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\"")
                 );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -416,9 +416,9 @@ static UniValue getaddressesbyaccount(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("accounts")) {
         if (request.fHelp) {
-            throw std::runtime_error("getaddressbyaccount (Deprecated, will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts)");
+            throw std::runtime_error("getaddressbyaccount (Deprecated, will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts)");
         }
-        throw JSONRPCError(RPC_METHOD_DEPRECATED, "getaddressesbyaccount is deprecated and will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts.");
+        throw JSONRPCError(RPC_METHOD_DEPRECATED, "getaddressesbyaccount is deprecated and will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts.");
     }
 
     if (request.fHelp || request.params.size() != 1)
@@ -429,7 +429,7 @@ static UniValue getaddressesbyaccount(const JSONRPCRequest& request)
                 "1. \"account\"        (string, required) The account name.\n"
                 "\nResult:\n"
                 "[                     (json array of string)\n"
-                "  \"address\"         (string) a bitcoin address associated with the given account\n"
+                "  \"address\"         (string) a donu address associated with the given account\n"
                 "  ,...\n"
                 "]\n"
                 "\nExamples:\n"
@@ -520,7 +520,7 @@ static UniValue sendtoaddress(const JSONRPCRequest& request)
                 "\nSend an amount to a given address.\n"
                 + HelpRequiringPassphrase(pwallet) +
                 "\nArguments:\n"
-                "1. \"address\"            (string, required) The bitcoin address to send to.\n"
+                "1. \"address\"            (string, required) The donu address to send to.\n"
                 "2. \"amount\"             (numeric or string, required) The amount in " + CURRENCY_UNIT + " to send. eg 0.1\n"
                                                                                                            "3. \"comment\"            (string, optional) A comment used to store what the transaction is for. \n"
                                                                                                            "                             This is not part of the transaction, just kept in your wallet.\n"
@@ -529,7 +529,7 @@ static UniValue sendtoaddress(const JSONRPCRequest& request)
                                                                                                            "                             transaction, just kept in your wallet.\n"
                                                                                                            "5. \"amount of splits\"     (numeric, optional) amount of UTXO splits. \n"
                                                                                                            "6. subtractfeefromamount  (boolean, optional, default=false) The fee will be deducted from the amount being sent.\n"
-                                                                                                           "                             The recipient will receive less bitcoins than you enter in the amount field.\n"
+                                                                                                           "                             The recipient will receive less donus than you enter in the amount field.\n"
                                                                                                            "7. replaceable            (boolean, optional) Allow this transaction to be replaced by a transaction with higher fees via BIP 125\n"
                                                                                                            "8. conf_target            (numeric, optional) Confirmation target (in blocks)\n"
                                                                                                            "9. \"estimate_mode\"      (string, optional, default=UNSET) The fee estimate mode, must be one of:\n"
@@ -620,7 +620,7 @@ static UniValue listaddressgroupings(const JSONRPCRequest& request)
                 "[\n"
                 "  [\n"
                 "    [\n"
-                "      \"address\",            (string) The bitcoin address\n"
+                "      \"address\",            (string) The donu address\n"
                 "      amount,                 (numeric) The amount in " + CURRENCY_UNIT + "\n"
                                                                                            "      \"label\"               (string, optional) The label\n"
                                                                                            "    ]\n"
@@ -673,7 +673,7 @@ static UniValue signmessage(const JSONRPCRequest& request)
                 "\nSign a message with the private key of an address"
                 + HelpRequiringPassphrase(pwallet) + "\n"
                                                      "\nArguments:\n"
-                                                     "1. \"address\"         (string, required) The bitcoin address to use for the private key.\n"
+                                                     "1. \"address\"         (string, required) The donu address to use for the private key.\n"
                                                      "2. \"message\"         (string, required) The message to create a signature of.\n"
                                                      "\nResult:\n"
                                                      "\"signature\"          (string) The signature of the message encoded in base 64\n"
@@ -681,11 +681,11 @@ static UniValue signmessage(const JSONRPCRequest& request)
                                                      "\nUnlock the wallet for 30 seconds\n"
                 + HelpExampleCli("walletpassphrase", "\"mypassphrase\" 30") +
                 "\nCreate the signature\n"
-                + HelpExampleCli("signmessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\" \"my message\"") +
+                + HelpExampleCli("signmessage", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\" \"my message\"") +
                 "\nVerify the signature\n"
-                + HelpExampleCli("verifymessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\" \"signature\" \"my message\"") +
+                + HelpExampleCli("verifymessage", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\" \"signature\" \"my message\"") +
                 "\nAs json rpc\n"
-                + HelpExampleRpc("signmessage", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\", \"my message\"")
+                + HelpExampleRpc("signmessage", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\", \"my message\"")
                 );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -733,19 +733,19 @@ static UniValue getreceivedbyaddress(const JSONRPCRequest& request)
                 "getreceivedbyaddress \"address\" ( minconf )\n"
                 "\nReturns the total amount received by the given address in transactions with at least minconf confirmations.\n"
                 "\nArguments:\n"
-                "1. \"address\"         (string, required) The bitcoin address for transactions.\n"
+                "1. \"address\"         (string, required) The donu address for transactions.\n"
                 "2. minconf             (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
                 "\nResult:\n"
                 "amount   (numeric) The total amount in " + CURRENCY_UNIT + " received at this address.\n"
                                                                             "\nExamples:\n"
                                                                             "\nThe amount from transactions with at least 1 confirmation\n"
-                + HelpExampleCli("getreceivedbyaddress", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\"") +
+                + HelpExampleCli("getreceivedbyaddress", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\"") +
                 "\nThe amount including unconfirmed transactions, zero confirmations\n"
-                + HelpExampleCli("getreceivedbyaddress", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\" 0") +
+                + HelpExampleCli("getreceivedbyaddress", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\" 0") +
                 "\nThe amount with at least 6 confirmations\n"
-                + HelpExampleCli("getreceivedbyaddress", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\" 6") +
+                + HelpExampleCli("getreceivedbyaddress", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\" 6") +
                 "\nAs a json rpc call\n"
-                + HelpExampleRpc("getreceivedbyaddress", "\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\", 6")
+                + HelpExampleRpc("getreceivedbyaddress", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\", 6")
                 );
 
     // Make sure the results are valid at least up to the most recent block
@@ -795,9 +795,9 @@ static UniValue getreceivedbylabel(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("accounts") && request.strMethod == "getreceivedbyaccount") {
         if (request.fHelp) {
-            throw std::runtime_error("getreceivedbyaccount (Deprecated, will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts)");
+            throw std::runtime_error("getreceivedbyaccount (Deprecated, will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts)");
         }
-        throw JSONRPCError(RPC_METHOD_DEPRECATED, "getreceivedbyaccount is deprecated and will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts.");
+        throw JSONRPCError(RPC_METHOD_DEPRECATED, "getreceivedbyaccount is deprecated and will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts.");
     }
 
     if (request.fHelp || request.params.size() < 1 || request.params.size() > 2)
@@ -874,7 +874,7 @@ static UniValue getbalance(const JSONRPCRequest& request)
                 "The server total may be different to the balance in the default \"\" account.\n"
                 "\nArguments:\n"
                 "1. \"account\"         (string, optional) DEPRECATED. This argument will be removed in V0.18. \n"
-                "                     To use this deprecated argument, start bitcoind with -deprecatedrpc=accounts. The account string may be given as a\n"
+                "                     To use this deprecated argument, start donud with -deprecatedrpc=accounts. The account string may be given as a\n"
                 "                     specific account name to find the balance associated with wallet keys in\n"
                 "                     a named account, or as the empty string (\"\") to find the balance\n"
                 "                     associated with wallet keys not in any named account, or as \"*\" to find\n"
@@ -886,8 +886,8 @@ static UniValue getbalance(const JSONRPCRequest& request)
                 "                     balances. In general, account balance calculation is not considered\n"
                 "                     reliable and has resulted in confusing outcomes, so it is recommended to\n"
                 "                     avoid passing this argument.\n"
-                "2. minconf           (numeric, optional, default=1) DEPRECATED. Only valid when an account is specified. This argument will be removed in V0.18. To use this deprecated argument, start bitcoind with -deprecatedrpc=accounts. Only include transactions confirmed at least this many times.\n"
-                "3. include_watchonly (bool, optional, default=false) DEPRECATED. Only valid when an account is specified. This argument will be removed in V0.18. To use this deprecated argument, start bitcoind with -deprecatedrpc=accounts. Also include balance in watch-only addresses (see 'importaddress')\n"
+                "2. minconf           (numeric, optional, default=1) DEPRECATED. Only valid when an account is specified. This argument will be removed in V0.18. To use this deprecated argument, start donud with -deprecatedrpc=accounts. Only include transactions confirmed at least this many times.\n"
+                "3. include_watchonly (bool, optional, default=false) DEPRECATED. Only valid when an account is specified. This argument will be removed in V0.18. To use this deprecated argument, start donud with -deprecatedrpc=accounts. Also include balance in watch-only addresses (see 'importaddress')\n"
                 "\nResult:\n"
                 "amount              (numeric) The total amount in " + CURRENCY_UNIT + " received for this account.\n"
                                                                                        "\nExamples:\n"
@@ -970,9 +970,9 @@ static UniValue movecmd(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("accounts")) {
         if (request.fHelp) {
-            throw std::runtime_error("move (Deprecated, will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts)");
+            throw std::runtime_error("move (Deprecated, will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts)");
         }
-        throw JSONRPCError(RPC_METHOD_DEPRECATED, "move is deprecated and will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts.");
+        throw JSONRPCError(RPC_METHOD_DEPRECATED, "move is deprecated and will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts.");
     }
 
     if (request.fHelp || request.params.size() < 3 || request.params.size() > 5)
@@ -1028,14 +1028,14 @@ static UniValue sendfrom(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() < 3 || request.params.size() > 6)
         throw std::runtime_error(
                 "sendfrom \"fromaccount\" \"toaddress\" amount ( minconf \"comment\" \"comment_to\" )\n"
-                "\nDEPRECATED (use sendtoaddress). Sent an amount from an account to a bitcoin address."
+                "\nDEPRECATED (use sendtoaddress). Sent an amount from an account to a donu address."
                 + HelpRequiringPassphrase(pwallet) + "\n"
                                                      "\nArguments:\n"
                                                      "1. \"fromaccount\"       (string, required) The name of the account to send funds from. May be the default account using \"\".\n"
                                                      "                       Specifying an account does not influence coin selection, but it does associate the newly created\n"
                                                      "                       transaction with the account, so the account's balance computation and transaction history can reflect\n"
                                                      "                       the spend.\n"
-                                                     "2. \"toaddress\"         (string, required) The bitcoin address to send funds to.\n"
+                                                     "2. \"toaddress\"         (string, required) The donu address to send funds to.\n"
                                                      "3. amount                (numeric or string, required) The amount in " + CURRENCY_UNIT + " (transaction fee is added on top).\n"
                                                                                                                                                "4. minconf               (numeric, optional, default=1) Only use funds with at least this many confirmations.\n"
                                                                                                                                                "5. \"comment\"           (string, optional) A comment used to store what the transaction is for. \n"
@@ -1047,11 +1047,11 @@ static UniValue sendfrom(const JSONRPCRequest& request)
                                                                                                                                                "\"txid\"                 (string) The transaction id.\n"
                                                                                                                                                "\nExamples:\n"
                                                                                                                                                "\nSend 0.01 " + CURRENCY_UNIT + " from the default account to the address, must have at least 1 confirmation\n"
-                + HelpExampleCli("sendfrom", "\"\" \"1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd\" 0.01") +
+                + HelpExampleCli("sendfrom", "\"\" \"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\" 0.01") +
                 "\nSend 0.01 from the tabby account to the given address, funds must have at least 6 confirmations\n"
-                + HelpExampleCli("sendfrom", "\"tabby\" \"1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd\" 0.01 6 \"donation\" \"seans outpost\"") +
+                + HelpExampleCli("sendfrom", "\"tabby\" \"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\" 0.01 6 \"donation\" \"seans outpost\"") +
                 "\nAs a json rpc call\n"
-                + HelpExampleRpc("sendfrom", "\"tabby\", \"1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd\", 0.01, 6, \"donation\", \"seans outpost\"")
+                + HelpExampleRpc("sendfrom", "\"tabby\", \"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\", 0.01, 6, \"donation\", \"seans outpost\"")
                 );
 
     // Make sure the results are valid at least up to the most recent block
@@ -1103,20 +1103,20 @@ static UniValue sendmany(const JSONRPCRequest& request)
         help_text = "sendmany \"\" {\"address\":amount,...} ( minconf \"comment\" [\"address\",...] replaceable conf_target \"estimate_mode\")\n"
                     "\nSend multiple times. Amounts are double-precision floating point numbers.\n"
                     "Note that the \"fromaccount\" argument has been removed in V0.17. To use this RPC with a \"fromaccount\" argument, restart\n"
-                    "bitcoind with -deprecatedrpc=accounts\n"
+                    "donud with -deprecatedrpc=accounts\n"
                 + HelpRequiringPassphrase(pwallet) + "\n"
                                                      "\nArguments:\n"
                                                      "1. \"dummy\"               (string, required) Must be set to \"\" for backwards compatibility.\n"
                                                      "2. \"amounts\"             (string, required) A json object with addresses and amounts\n"
                                                      "    {\n"
-                                                     "      \"address\":amount   (numeric or string) The bitcoin address is the key, the numeric amount (can be string) in " + CURRENCY_UNIT + " is the value\n"
+                                                     "      \"address\":amount   (numeric or string) The donu address is the key, the numeric amount (can be string) in " + CURRENCY_UNIT + " is the value\n"
                                                                                                                                                                                                "      ,...\n"
                                                                                                                                                                                                "    }\n"
                                                                                                                                                                                                "3. minconf                 (numeric, optional, default=1) Only use the balance confirmed at least this many times.\n"
                                                                                                                                                                                                "4. \"comment\"             (string, optional) A comment\n"
                                                                                                                                                                                                "5. subtractfeefrom         (array, optional) A json array with addresses.\n"
                                                                                                                                                                                                "                           The fee will be equally deducted from the amount of each selected address.\n"
-                                                                                                                                                                                               "                           Those recipients will receive less bitcoins than you enter in their corresponding amount field.\n"
+                                                                                                                                                                                               "                           Those recipients will receive less donus than you enter in their corresponding amount field.\n"
                                                                                                                                                                                                "                           If no addresses are specified here, the sender pays the fee.\n"
                                                                                                                                                                                                "    [\n"
                                                                                                                                                                                                "      \"address\"          (string) Subtract fee from this address\n"
@@ -1133,13 +1133,13 @@ static UniValue sendmany(const JSONRPCRequest& request)
                                                                                                                                                                                                "                                    the number of addresses.\n"
                                                                                                                                                                                                "\nExamples:\n"
                                                                                                                                                                                                "\nSend two amounts to two different addresses:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\\\":0.01,\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\"") +
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"NTrUD95yCqxYpWWL2fZqfRTNQreq68fRCY\\\":0.01,\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.02}\"") +
                 "\nSend two amounts to two different addresses setting the confirmation and comment:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\\\":0.01,\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\" 6 \"testing\"") +
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.01,\\\"NTrUD95yCqxYpWWL2fZqfRTNQreq68fRCY\\\":0.02}\" 6 \"testing\"") +
                 "\nSend two amounts to two different addresses, subtract fee from amount:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\\\":0.01,\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\" 1 \"\" \"[\\\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\\\",\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\"]\"") +
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"1NTrUD95yCqxYpWWL2fZqfRTNQreq68fRCY\\\":0.01,\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.02}\" 1 \"\" \"[\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTf8RCY\\\",\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTf9RCY\\\"]\"") +
                 "\nAs a json rpc call\n"
-                + HelpExampleRpc("sendmany", "\"\", {\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}, 6, \"testing\"");
+                + HelpExampleRpc("sendmany", "\"\", {\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\":0.01,\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\":0.02}, 6, \"testing\"");
     } else {
         help_text = "sendmany \"\" \"fromaccount\" {\"address\":amount,...} ( minconf \"comment\" [\"address\",...] replaceable conf_target \"estimate_mode\")\n"
                     "\nSend multiple times. Amounts are double-precision floating point numbers."
@@ -1148,14 +1148,14 @@ static UniValue sendmany(const JSONRPCRequest& request)
                                                      "1. \"fromaccount\"         (string, required) DEPRECATED. The account to send the funds from. Should be \"\" for the default account\n"
                                                      "2. \"amounts\"             (string, required) A json object with addresses and amounts\n"
                                                      "    {\n"
-                                                     "      \"address\":amount   (numeric or string) The bitcoin address is the key, the numeric amount (can be string) in " + CURRENCY_UNIT + " is the value\n"
+                                                     "      \"address\":amount   (numeric or string) The donu address is the key, the numeric amount (can be string) in " + CURRENCY_UNIT + " is the value\n"
                                                                                                                                                                                                "      ,...\n"
                                                                                                                                                                                                "    }\n"
                                                                                                                                                                                                "3. minconf                 (numeric, optional, default=1) Only use the balance confirmed at least this many times.\n"
                                                                                                                                                                                                "4. \"comment\"             (string, optional) A comment\n"
                                                                                                                                                                                                "5. subtractfeefrom         (array, optional) A json array with addresses.\n"
                                                                                                                                                                                                "                           The fee will be equally deducted from the amount of each selected address.\n"
-                                                                                                                                                                                               "                           Those recipients will receive less bitcoins than you enter in their corresponding amount field.\n"
+                                                                                                                                                                                               "                           Those recipients will receive less donu than you enter in their corresponding amount field.\n"
                                                                                                                                                                                                "                           If no addresses are specified here, the sender pays the fee.\n"
                                                                                                                                                                                                "    [\n"
                                                                                                                                                                                                "      \"address\"          (string) Subtract fee from this address\n"
@@ -1172,13 +1172,13 @@ static UniValue sendmany(const JSONRPCRequest& request)
                                                                                                                                                                                                "                                    the number of addresses.\n"
                                                                                                                                                                                                "\nExamples:\n"
                                                                                                                                                                                                "\nSend two amounts to two different addresses:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\\\":0.01,\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\"") +
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.01,\\\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.02}\"") +
                 "\nSend two amounts to two different addresses setting the confirmation and comment:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\\\":0.01,\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\" 6 \"testing\"") +
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.01,\\\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.02}\" 6 \"testing\"") +
                 "\nSend two amounts to two different addresses, subtract fee from amount:\n"
-                + HelpExampleCli("sendmany", "\"\" \"{\\\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\\\":0.01,\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\":0.02}\" 1 \"\" \"[\\\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\\\",\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\"]\"") +
+                + HelpExampleCli("sendmany", "\"\" \"{\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.01,\\\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\":0.02}\" 1 \"\" \"[\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\",\\\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\\\"]\"") +
                 "\nAs a json rpc call\n"
-                + HelpExampleRpc("sendmany", "\"\", {\"1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX\":0.01,\"1353tsE8YMTA4EuV7dgUXGjNFf9KpVvKHz\":0.02}, 6, \"testing\"");
+                + HelpExampleRpc("sendmany", "\"\", {\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\":0.01,\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\":0.02}, 6, \"testing\"");
     }
 
     if (request.fHelp || request.params.size() < 2 || request.params.size() > 8) throw std::runtime_error(help_text);
@@ -1303,9 +1303,9 @@ static UniValue addmultisigaddress(const JSONRPCRequest& request)
 
                           "\nArguments:\n"
                           "1. nrequired                      (numeric, required) The number of required signatures out of the n keys or addresses.\n"
-                          "2. \"keys\"                         (string, required) A json array of bitcoin addresses or hex-encoded public keys\n"
+                          "2. \"keys\"                         (string, required) A json array of donu addresses or hex-encoded public keys\n"
                           "     [\n"
-                          "       \"address\"                  (string) bitcoin address or hex-encoded public key\n"
+                          "       \"address\"                  (string) donu address or hex-encoded public key\n"
                           "       ...,\n"
                           "     ]\n"
                           "3. \"label\"                        (string, optional) A label to assign the addresses to.\n"
@@ -1318,9 +1318,9 @@ static UniValue addmultisigaddress(const JSONRPCRequest& request)
                           "}\n"
                           "\nExamples:\n"
                           "\nAdd a multisig address from 2 addresses\n"
-                + HelpExampleCli("addmultisigaddress", "2 \"[\\\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\\\",\\\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\\\"]\"") +
+                + HelpExampleCli("addmultisigaddress", "2 \"[\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\",\\\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\"]\"") +
                 "\nAs json rpc call\n"
-                + HelpExampleRpc("addmultisigaddress", "2, \"[\\\"16sSauSf5pF2UkUwvKGq4qjNRzBZYqgEL5\\\",\\\"171sgjn4YtPu27adkKGrdDwzRTxnRkBfKV\\\"]\"")
+                + HelpExampleRpc("addmultisigaddress", "2, \"[\\\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\",\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\"]\"")
                 ;
         throw std::runtime_error(msg);
     }
@@ -1447,7 +1447,7 @@ static UniValue addwitnessaddress(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("addwitnessaddress")) {
         throw JSONRPCError(RPC_METHOD_DEPRECATED, "addwitnessaddress is deprecated and will be fully removed in v0.17. "
-                                                  "To use addwitnessaddress in v0.16, restart bitcoind with -deprecatedrpc=addwitnessaddress.\n"
+                                                  "To use addwitnessaddress in v0.16, restart donud with -deprecatedrpc=addwitnessaddress.\n"
                                                   "Projects should transition to using the address_type argument of getnewaddress, or option -addresstype=[bech32|p2sh-segwit] instead.\n");
     }
 
@@ -1689,7 +1689,7 @@ static UniValue listreceivedbyaddress(const JSONRPCRequest& request)
                 + HelpExampleCli("listreceivedbyaddress", "")
                 + HelpExampleCli("listreceivedbyaddress", "6 true")
                 + HelpExampleRpc("listreceivedbyaddress", "6, true, true")
-                + HelpExampleRpc("listreceivedbyaddress", "6, true, true, \"1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd\"")
+                + HelpExampleRpc("listreceivedbyaddress", "6, true, true, \"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\"")
                 );
 
     // Make sure the results are valid at least up to the most recent block
@@ -1710,9 +1710,9 @@ static UniValue listreceivedbylabel(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("accounts") && request.strMethod == "listreceivedbyaccount") {
         if (request.fHelp) {
-            throw std::runtime_error("listreceivedbyaccount (Deprecated, will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts)");
+            throw std::runtime_error("listreceivedbyaccount (Deprecated, will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts)");
         }
-        throw JSONRPCError(RPC_METHOD_DEPRECATED, "listreceivedbyaccount is deprecated and will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts.");
+        throw JSONRPCError(RPC_METHOD_DEPRECATED, "listreceivedbyaccount is deprecated and will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts.");
     }
 
     if (request.fHelp || request.params.size() > 3)
@@ -1878,7 +1878,7 @@ UniValue listtransactions(const JSONRPCRequest& request)
         help_text = "listtransactions (dummy count skip include_watchonly)\n"
                     "\nReturns up to 'count' most recent transactions skipping the first 'from' transactions for account 'account'.\n"
                     "Note that the \"account\" argument and \"otheraccount\" return value have been removed in V0.17. To use this RPC with an \"account\" argument, restart\n"
-                    "bitcoind with -deprecatedrpc=accounts\n"
+                    "donud with -deprecatedrpc=accounts\n"
                     "\nArguments:\n"
                     "1. \"dummy\"    (string, optional) If set, should be \"*\" for backwards compatibility.\n"
                     "2. count          (numeric, optional, default=10) The number of transactions to return\n"
@@ -1887,7 +1887,7 @@ UniValue listtransactions(const JSONRPCRequest& request)
                     "\nResult:\n"
                     "[\n"
                     "  {\n"
-                    "    \"address\":\"address\",    (string) The bitcoin address of the transaction.\n"
+                    "    \"address\":\"address\",    (string) The donu address of the transaction.\n"
                     "    \"category\":\"send|receive\", (string) The transaction category.\n"
                     "    \"amount\": x.xxx,          (numeric) The amount in " + CURRENCY_UNIT + ". This is negative for the 'send' category, and is positive\n"
                                                                                                  "                                        for the 'receive' category,\n"
@@ -1932,7 +1932,7 @@ UniValue listtransactions(const JSONRPCRequest& request)
                     "  {\n"
                     "    \"account\":\"accountname\",       (string) DEPRECATED. This field will be removed in V0.18. The account name associated with the transaction. \n"
                     "                                                It will be \"\" for the default account.\n"
-                    "    \"address\":\"address\",    (string) The bitcoin address of the transaction. Not present for \n"
+                    "    \"address\":\"address\",    (string) The donu address of the transaction. Not present for \n"
                     "                                                move transactions (category = move).\n"
                     "    \"category\":\"send|receive|move\", (string) The transaction category. 'move' is a local (off blockchain)\n"
                     "                                                transaction between accounts, and not associated with an address,\n"
@@ -2063,9 +2063,9 @@ static UniValue listaccounts(const JSONRPCRequest& request)
 
     if (!IsDeprecatedRPCEnabled("accounts")) {
         if (request.fHelp) {
-            throw std::runtime_error("listaccounts (Deprecated, will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts)");
+            throw std::runtime_error("listaccounts (Deprecated, will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts)");
         }
-        throw JSONRPCError(RPC_METHOD_DEPRECATED, "listaccounts is deprecated and will be removed in V0.18. To use this command, start bitcoind with -deprecatedrpc=accounts.");
+        throw JSONRPCError(RPC_METHOD_DEPRECATED, "listaccounts is deprecated and will be removed in V0.18. To use this command, start donud with -deprecatedrpc=accounts.");
     }
 
     if (request.fHelp || request.params.size() > 2)
@@ -2169,8 +2169,8 @@ static UniValue listsinceblock(const JSONRPCRequest& request)
                 "\nResult:\n"
                 "{\n"
                 "  \"transactions\": [\n"
-                "    \"account\":\"accountname\",       (string) DEPRECATED. This field will be removed in V0.18. To see this deprecated field, start bitcoind with -deprecatedrpc=accounts. The account name associated with the transaction. Will be \"\" for the default account.\n"
-                "    \"address\":\"address\",    (string) The bitcoin address of the transaction. Not present for move transactions (category = move).\n"
+                "    \"account\":\"accountname\",       (string) DEPRECATED. This field will be removed in V0.18. To see this deprecated field, start donud with -deprecatedrpc=accounts. The account name associated with the transaction. Will be \"\" for the default account.\n"
+                "    \"address\":\"address\",    (string) The donu address of the transaction. Not present for move transactions (category = move).\n"
                 "    \"category\":\"send|receive\",     (string) The transaction category. 'send' has negative amounts, 'receive' has positive amounts.\n"
                 "    \"amount\": x.xxx,          (numeric) The amount in " + CURRENCY_UNIT + ". This is negative for the 'send' category, and for the 'move' category for moves \n"
                                                                                              "                                          outbound. It is positive for the 'receive' category, and for the 'move' category for inbound funds.\n"
@@ -2316,8 +2316,8 @@ static UniValue gettransaction(const JSONRPCRequest& request)
                                                                                                                                                                                            "                                                   may be unknown for unconfirmed transactions not in the mempool\n"
                                                                                                                                                                                            "  \"details\" : [\n"
                                                                                                                                                                                            "    {\n"
-                                                                                                                                                                                           "      \"account\" : \"accountname\",      (string) DEPRECATED. This field will be removed in a V0.18. To see this deprecated field, start bitcoind with -deprecatedrpc=accounts. The account name involved in the transaction, can be \"\" for the default account.\n"
-                                                                                                                                                                                           "      \"address\" : \"address\",          (string) The bitcoin address involved in the transaction\n"
+                                                                                                                                                                                           "      \"account\" : \"accountname\",      (string) DEPRECATED. This field will be removed in a V0.18. To see this deprecated field, start donud with -deprecatedrpc=accounts. The account name involved in the transaction, can be \"\" for the default account.\n"
+                                                                                                                                                                                           "      \"address\" : \"address\",          (string) The donu address involved in the transaction\n"
                                                                                                                                                                                            "      \"category\" : \"send|receive\",    (string) The category, either 'send' or 'receive'\n"
                                                                                                                                                                                            "      \"amount\" : x.xxx,                 (numeric) The amount in " + CURRENCY_UNIT + "\n"
                                                                                                                                                                                                                                                                                   "      \"label\" : \"label\",              (string) A comment for the address/transaction, if any\n"
@@ -2515,7 +2515,7 @@ static UniValue walletpassphrase(const JSONRPCRequest& request)
         throw std::runtime_error(
                     "walletpassphrase \"passphrase\" timeout\n"
                     "\nStores the wallet decryption key in memory for 'timeout' seconds.\n"
-                    "This is needed prior to performing transactions related to private keys such as sending bitcoins\n"
+                    "This is needed prior to performing transactions related to private keys such as sending donu\n"
                     "\nArguments:\n"
                     "1. \"passphrase\"     (string, required) The wallet passphrase\n"
                     "2. timeout            (numeric, required) The time to keep the decryption key in seconds; capped at 100000000 (~3 years).\n"
@@ -2650,7 +2650,7 @@ static UniValue walletlock(const JSONRPCRequest& request)
                     "\nSet the passphrase for 2 minutes to perform a transaction\n"
                     + HelpExampleCli("walletpassphrase", "\"my pass phrase\" 120") +
                     "\nPerform a send (requires passphrase set)\n"
-                    + HelpExampleCli("sendtoaddress", "\"1M72Sfpbz1BPpXFHz9m3CdqATR44Jvaydd\" 1.0") +
+                    + HelpExampleCli("sendtoaddress", "\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\" 1.0") +
                     "\nClear the passphrase since we are done before 2 minutes is up\n"
                     + HelpExampleCli("walletlock", "") +
                     "\nAs json rpc call\n"
@@ -2692,7 +2692,7 @@ static UniValue encryptwallet(const JSONRPCRequest& request)
                     "\nExamples:\n"
                     "\nEncrypt your wallet\n"
                     + HelpExampleCli("encryptwallet", "\"my pass phrase\"") +
-                    "\nNow set the passphrase to use the wallet, such as for signing or sending bitcoin\n"
+                    "\nNow set the passphrase to use the wallet, such as for signing or sending donu\n"
                     + HelpExampleCli("walletpassphrase", "\"my pass phrase\"") +
                     "\nNow we can do something like sign\n"
                     + HelpExampleCli("signmessage", "\"address\" \"test message\"") +
@@ -2744,7 +2744,7 @@ static UniValue lockunspent(const JSONRPCRequest& request)
                 "\nUpdates list of temporarily unspendable outputs.\n"
                 "Temporarily lock (unlock=false) or unlock (unlock=true) specified transaction outputs.\n"
                 "If no transaction outputs are specified when unlocking then all current locked transaction outputs are unlocked.\n"
-                "A locked transaction output will not be chosen by automatic coin selection, when spending bitcoins.\n"
+                "A locked transaction output will not be chosen by automatic coin selection, when spending donu.\n"
                 "Locks are stored in memory only. Nodes start with zero locked outputs, and the locked output list\n"
                 "is always cleared (by virtue of process exit) when a node stops or fails.\n"
                 "Also see the listunspent call\n"
@@ -3082,9 +3082,9 @@ static UniValue listunspent(const JSONRPCRequest& request)
                 "\nArguments:\n"
                 "1. minconf          (numeric, optional, default=1) The minimum confirmations to filter\n"
                 "2. maxconf          (numeric, optional, default=9999999) The maximum confirmations to filter\n"
-                "3. \"addresses\"      (string) A json array of bitcoin addresses to filter\n"
+                "3. \"addresses\"      (string) A json array of donu addresses to filter\n"
                 "    [\n"
-                "      \"address\"     (string) bitcoin address\n"
+                "      \"address\"     (string) donu address\n"
                 "      ,...\n"
                 "    ]\n"
                 "4. include_unsafe (bool, optional, default=true) Include outputs that are not safe to spend\n"
@@ -3101,9 +3101,9 @@ static UniValue listunspent(const JSONRPCRequest& request)
                                                                                                                                                                                                                                                                                                                                                                            "  {\n"
                                                                                                                                                                                                                                                                                                                                                                            "    \"txid\" : \"txid\",          (string) the transaction id \n"
                                                                                                                                                                                                                                                                                                                                                                            "    \"vout\" : n,               (numeric) the vout value\n"
-                                                                                                                                                                                                                                                                                                                                                                           "    \"address\" : \"address\",    (string) the bitcoin address\n"
+                                                                                                                                                                                                                                                                                                                                                                           "    \"address\" : \"address\",    (string) the donu address\n"
                                                                                                                                                                                                                                                                                                                                                                            "    \"label\" : \"label\",        (string) The associated label, or \"\" for the default label\n"
-                                                                                                                                                                                                                                                                                                                                                                           "    \"account\" : \"account\",    (string) DEPRECATED. This field will be removed in V0.18. To see this deprecated field, start bitcoind with -deprecatedrpc=accounts. The associated account, or \"\" for the default account\n"
+                                                                                                                                                                                                                                                                                                                                                                           "    \"account\" : \"account\",    (string) DEPRECATED. This field will be removed in V0.18. To see this deprecated field, start donud with -deprecatedrpc=accounts. The associated account, or \"\" for the default account\n"
                                                                                                                                                                                                                                                                                                                                                                            "    \"scriptPubKey\" : \"key\",   (string) the script key\n"
                                                                                                                                                                                                                                                                                                                                                                            "    \"amount\" : x.xxx,         (numeric) the transaction output amount in " + CURRENCY_UNIT + "\n"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "    \"confirmations\" : n,      (numeric) The number of confirmations\n"
@@ -3119,8 +3119,8 @@ static UniValue listunspent(const JSONRPCRequest& request)
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "\nExamples\n"
                 + HelpExampleCli("listunspent", "")
-                + HelpExampleCli("listunspent", "6 9999999 \"[\\\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\\\",\\\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\\\"]\"")
-                + HelpExampleRpc("listunspent", "6, 9999999 \"[\\\"1PGFqEzfmQch1gKD3ra4k18PNj3tTUUSqg\\\",\\\"1LtvqCaApEdUGFkpKMM4MstjcaL4dKg8SP\\\"]\"")
+                + HelpExampleCli("listunspent", "6 9999999 \"[\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\",\\\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\"]\"")
+                + HelpExampleRpc("listunspent", "6, 9999999 \"[\\\"Nt8UD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\",\\\"NNwUD95yCqxYpWWL2fZqfRTNQreqTffRCY\\\"]\"")
                 + HelpExampleCli("listunspent", "6 9999999 '[]' true '{ \"minimumAmount\": 0.005 }'")
                 + HelpExampleRpc("listunspent", "6, 9999999, [] , true, { \"minimumAmount\": 0.005 } ")
                 );
@@ -3261,7 +3261,7 @@ static UniValue fundrawtransaction(const JSONRPCRequest& request)
                 "1. \"hexstring\"           (string, required) The hex string of the raw transaction\n"
                 "2. options                 (object, optional)\n"
                 "   {\n"
-                "     \"changeAddress\"          (string, optional, default pool address) The bitcoin address to receive the change\n"
+                "     \"changeAddress\"          (string, optional, default pool address) The donu address to receive the change\n"
                 "     \"changePosition\"         (numeric, optional, default random) The index of the change output\n"
                 "     \"change_type\"            (string, optional) The output type to use. Only valid if changeAddress is not specified. Options are \"legacy\", \"p2sh-segwit\", and \"bech32\". Default is set by -changetype.\n"
                 "     \"includeWatching\"        (boolean, optional, default false) Also select inputs which are watch only\n"
@@ -3270,7 +3270,7 @@ static UniValue fundrawtransaction(const JSONRPCRequest& request)
                                                                                                                                                                      "     \"subtractFeeFromOutputs\" (array, optional) A json array of integers.\n"
                                                                                                                                                                      "                              The fee will be equally deducted from the amount of each specified output.\n"
                                                                                                                                                                      "                              The outputs are specified by their zero-based index, before any change output is added.\n"
-                                                                                                                                                                     "                              Those recipients will receive less bitcoins than you enter in their corresponding amount field.\n"
+                                                                                                                                                                     "                              Those recipients will receive less donu than you enter in their corresponding amount field.\n"
                                                                                                                                                                      "                              If no outputs are specified here, the sender pays the fee.\n"
                                                                                                                                                                      "                                  [vout_index,...]\n"
                                                                                                                                                                      "     \"replaceable\"            (boolean, optional) Marks this transaction as BIP125 replaceable.\n"
@@ -3343,7 +3343,7 @@ static UniValue fundrawtransaction(const JSONRPCRequest& request)
                 CTxDestination dest = DecodeDestination(options["changeAddress"].get_str());
 
                 if (!IsValidDestination(dest)) {
-                    throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "changeAddress must be a valid bitcoin address");
+                    throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "changeAddress must be a valid donu address");
                 }
 
                 coinControl.destChange = dest;
@@ -3915,13 +3915,13 @@ UniValue getaddressinfo(const JSONRPCRequest& request)
     if (request.fHelp || request.params.size() != 1) {
         throw std::runtime_error(
                     "getaddressinfo \"address\"\n"
-                    "\nReturn information about the given bitcoin address. Some information requires the address\n"
+                    "\nReturn information about the given donu address. Some information requires the address\n"
                     "to be in the wallet.\n"
                     "\nArguments:\n"
-                    "1. \"address\"                    (string, required) The bitcoin address to get the information of.\n"
+                    "1. \"address\"                    (string, required) The donu address to get the information of.\n"
                     "\nResult:\n"
                     "{\n"
-                    "  \"address\" : \"address\",        (string) The bitcoin address validated\n"
+                    "  \"address\" : \"address\",        (string) The donu address validated\n"
                     "  \"scriptPubKey\" : \"hex\",       (string) The hex encoded scriptPubKey generated by the address\n"
                     "  \"ismine\" : true|false,        (boolean) If the address is yours or not\n"
                     "  \"iswatchonly\" : true|false,   (boolean) If the address is watchonly\n"
@@ -3941,7 +3941,7 @@ UniValue getaddressinfo(const JSONRPCRequest& request)
                     "  \"embedded\" : {...},           (object, optional) Information about the address embedded in P2SH or P2WSH, if relevant and known. It includes all getaddressinfo output fields for the embedded address, excluding metadata (\"timestamp\", \"hdkeypath\", \"hdmasterkeyid\") and relation to the wallet (\"ismine\", \"iswatchonly\", \"account\").\n"
                     "  \"iscompressed\" : true|false,  (boolean) If the address is compressed\n"
                     "  \"label\" :  \"label\"         (string) The label associated with the address, \"\" is the default account\n"
-                    "  \"account\" : \"account\"         (string) DEPRECATED. This field will be removed in V0.18. To see this deprecated field, start bitcoind with -deprecatedrpc=accounts. The account associated with the address, \"\" is the default account\n"
+                    "  \"account\" : \"account\"         (string) DEPRECATED. This field will be removed in V0.18. To see this deprecated field, start donu with -deprecatedrpc=accounts. The account associated with the address, \"\" is the default account\n"
                     "  \"timestamp\" : timestamp,      (number, optional) The creation time of the key if available in seconds since epoch (Jan 1 1970 GMT)\n"
                     "  \"hdkeypath\" : \"keypath\"       (string, optional) The HD keypath if the key is HD and available\n"
                     "  \"hdmasterkeyid\" : \"<hash160>\" (string, optional) The Hash160 of the HD master pubkey\n"

@@ -20,7 +20,7 @@ public:
     State validate(QString &input, int &pos) const;
 };
 
-/** DONU address widget validator, checks for a valid bitcoin address.
+/** DONU address widget validator, checks for a valid donu address.
  */
 class DONUAddressCheckValidator : public QValidator
 {

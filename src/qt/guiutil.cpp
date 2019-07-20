@@ -129,8 +129,8 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 
 bool parseDONUURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no bitcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("bitcoin"))
+    // return if URI is not valid or is no donu: URI
+    if(!uri.isValid() || uri.scheme() != QString("donu"))
         return false;
 
     SendCoinsRecipient rv;
@@ -192,7 +192,7 @@ bool parseDONUURI(QString uri, SendCoinsRecipient *out)
 
 QString formatDONUURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("bitcoin:%1").arg(info.address);
+    QString ret = QString("donu:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
@@ -408,7 +408,7 @@ bool openDONUConf()
 
     configFile.close();
 
-    /* Open bitcoin.conf with the associated application */
+    /* Open donu.conf with the associated application */
     return QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
 
@@ -679,8 +679,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "bitcoin.desktop";
-    return GetAutostartDir() / strprintf("bitcoin-%s.lnk", chain);
+        return GetAutostartDir() / "donu.desktop";
+    return GetAutostartDir() / strprintf("donu-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()

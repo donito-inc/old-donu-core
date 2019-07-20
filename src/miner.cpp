@@ -583,9 +583,9 @@ static bool ProcessBlockFound(const std::shared_ptr<const CBlock> &pblock, const
 
 void static DONUMiner(const CChainParams& chainparams, CConnman& connman, CWallet* pwallet, bool fProofOfStake)
 {
-    LogPrintf("bitcoinminer -- started\n");
+    LogPrintf("donuminer -- started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("bitcoin-miner");
+    RenameThread("donu-miner");
 
     unsigned int nExtraNonce = 0;
 
@@ -634,7 +634,7 @@ void static DONUMiner(const CChainParams& chainparams, CConnman& connman, CWalle
             auto pblocktemplate = assemlber.CreateNewBlock(pwallet, coinbaseScript->reserveScript, fProofOfStake, true);
             if (!pblocktemplate.get())
             {
-                LogPrintf("bitcoinminer -- Failed to find a coinstake\n");
+                LogPrintf("donuminer -- Failed to find a coinstake\n");
                 MilliSleep(5000);
                 continue;
             }
@@ -689,7 +689,7 @@ void static DONUMiner(const CChainParams& chainparams, CConnman& connman, CWalle
                     {
                         // Found a solution
                         SetThreadPriority(THREAD_PRIORITY_NORMAL);
-                        LogPrintf("bitcoinminer:\n  proof-of-work found\n  hash: %s\n  target: %s\n", hash.GetHex(), hashTarget.GetHex());
+                        LogPrintf("donuminer:\n  proof-of-work found\n  hash: %s\n  target: %s\n", hash.GetHex(), hashTarget.GetHex());
                         ProcessBlockFound(pblock, chainparams);
                         SetThreadPriority(THREAD_PRIORITY_LOWEST);
                         coinbaseScript->KeepScript();
@@ -725,7 +725,7 @@ void static DONUMiner(const CChainParams& chainparams, CConnman& connman, CWalle
         }
         catch (const std::runtime_error &e)
         {
-            LogPrintf("bitcoinminer -- runtime error: %s\n", e.what());
+            LogPrintf("donuminer -- runtime error: %s\n", e.what());
             //            return;
         }
     }
