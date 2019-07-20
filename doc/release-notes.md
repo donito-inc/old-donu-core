@@ -1,86 +1,37 @@
-Bitcoin Core version 0.17.x is now available from:
+Donu version 0.18.0 is now available. This is a mandatory upgrade which should happen before block 47949.
 
-  <https://bitcoincore.org/bin/bitcoin-core-0.17.x/>
+### Changes and corrections
 
-This is a new minor version release, including new features, various bugfixes
-and performance improvements, as well as updated translations.
+**GetMasternodePayment** has been updated to return 0.4 DONU as the masternode reward.  It previously was dividing the total block
+reward in half without consideration for the platform emissions of 0.2 DONU.
 
-Please report bugs using the issue tracker at GitHub:
+**The math for expectedReward** has been corrected.  Earlier revisions during staging factored in the platform emissions outside
+of the scope of GetBlockSubsidy and has since been changed.
 
-  <https://github.com/bitcoin/bitcoin/issues>
+**Some branding corrections** have been made addressing references to "bitcoin" and updated to to "donu" and "DONU".
 
-To receive security and update notifications, please subscribe to:
+**Mining payouts** have been corrected to include masternodes during the proof-of-work phase.
 
-  <https://bitcoincore.org/en/list/announcements/join/>
+The default port shown in the **masternode.conf** example has been updated to reflect the correct mainnet port.
 
-How to Upgrade
-==============
+**Image updates** were made in src/qt/res/icons as well as src/qt/res/movies as well as **copyright** information
 
-If you are running an older version, shut it down. Wait until it has completely
-shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Bitcoin-Qt` (on Mac)
-or `bitcoind`/`bitcoin-qt` (on Linux).
+### Installing your Donu wallet
 
-If your node has a txindex, the txindex db will be migrated the first time you
-run 0.17.0 or newer, which may take up to a few hours. Your node will not be
-functional until this migration completes.
+We would recommend reading the following articles if you're unsure of how to use the release files or install the new Donu wallet:
 
-The first time you run version 0.15.0 or newer, your chainstate database will be converted to a
-new format, which will take anywhere from a few minutes to half an hour,
-depending on the speed of your machine.
+[Linux Installation](https://www.donu.support/portal/kb/articles/installing-your-donu-wallet-in-linux)
+[Windows Installation](https://www.donu.support/portal/kb/articles/installing-your-donu-wallet-in-windows)
+[MacOS Installation](https://www.donu.support/portal/kb/articles/installing-your-donu-wallet-in-macos)
 
-Note that the block database format also changed in version 0.8.0 and there is no
-automatic upgrade code from before version 0.8 to version 0.15.0. Upgrading
-directly from 0.7.x and earlier without redownloading the blockchain is not supported.
-However, as usual, old wallet versions are still supported.
+### Support & Communication
 
-Downgrading warning
--------------------
+We have a support portal and knowledgebase available at the [Donu knowledgebase & support portal](https://www.donu.support) and you can communicate with the team and the community at any of the locations below:
 
-The chainstate database for this release is not compatible with previous
-releases, so if you run 0.15 and then decide to switch back to any
-older version, you will need to run the old release with the `-reindex-chainstate`
-option to rebuild the chainstate data structures in the old format.
+[Telegram](https://www.donu.io/telegram)
+[Discord](https://www.donu.io/discord)
+[Matrix Chat](https://www.donu.io/matrix)
+[Twitter](https://www.donu.io/twitter)
+[Facebook](https://www.donu.io/facebook)
+[Reddit](https://www.donu.io/reddit)
 
-If your node has pruning enabled, this will entail re-downloading and
-processing the entire blockchain.
-
-Compatibility
-==============
-
-Bitcoin Core is extensively tested on multiple operating systems using
-the Linux kernel, macOS 10.10+, and Windows 7 and newer (Windows XP is not supported).
-
-Bitcoin Core should also work on most other Unix-like systems but is not
-frequently tested on them.
-
-From 0.17.0 onwards macOS <10.10 is no longer supported. 0.17.0 is built using Qt 5.9.x, which doesn't
-support versions of macOS older than 10.10.
-
-Notable changes
-===============
-
-Documentation
--------------
-
-- A new document introduces Bitcoin Core's BIP174
-  [Partially-Signed Bitcoin Transactions (PSBT)](https://github.com/bitcoin/bitcoin/blob/0.17/doc/psbt.md)
-  interface, which is used to allow multiple programs to collaboratively
-  work to create, sign, and broadcast new transactions.  This is useful
-  for offline (cold storage) wallets, multisig wallets, coinjoin
-  implementations, and many other cases where two or more programs need
-  to interact to generate a complete transaction.
-
-0.17.x change log
-=================
-
-(todo)
-
-Credits
-=======
-
-Thanks to everyone who directly contributed to this release:
-
-(todo)
-
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).
