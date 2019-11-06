@@ -3224,6 +3224,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
             for (size_t i = 0; i < devTx->vout.size(); i++) {
                 if (devTx->vout[i].scriptPubKey == PlatformScript() && devTx->vout[i].nValue == devFee) {
                     foundDevFee = true;
+                    LogPrint(BCLog::VALIDATION, "Validation::devFee found in POS block\n");
                     break;
                 }
             }
@@ -3233,6 +3234,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
             for (size_t i = 0; i < devTx2->vout.size(); i++) {
                 if (devTx2->vout[i].scriptPubKey == PlatformScript() && devTx2->vout[i].nValue == devFee) {
                     foundDevFee = true;
+                    LogPrint(BCLog::VALIDATION, "Validation::devFee found in POW block\n");
                     break;
                 }
             }
