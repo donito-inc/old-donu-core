@@ -3159,6 +3159,9 @@ static bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state,
 
 bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckContractOutpoint)
 {
+    int nBlockHeight = chainActive.Height() + 1;
+    bool foundDevFee = false;
+    
     // These are checks that are independent of context.
 
     if (block.fChecked)
@@ -3215,16 +3218,17 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
                 return state.DoS(100, error("CheckBlock() : more than one coinstake"));
     }
 
+    /* Check every block except genesis for devFee */
     if (chainActive.Height() > 0) {
         int64_t devFee = Params().GetEmissionsAmount();
-        bool foundDevFee = false;
         bool isProofOfStake = block.IsProofOfStake();
+
         if (block.IsProofOfStake()) {
             const auto &devTx = block.vtx[1];
             for (size_t i = 0; i < devTx->vout.size(); i++) {
                 if (devTx->vout[i].scriptPubKey == PlatformScript() && devTx->vout[i].nValue == devFee) {
                     foundDevFee = true;
-                    LogPrint(BCLog::VALIDATION, "Validation::devFee found in POS block\n");
+                    LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee found in POS block\n");
                     break;
                 }
             }
@@ -3234,15 +3238,23 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
             for (size_t i = 0; i < devTx2->vout.size(); i++) {
                 if (devTx2->vout[i].scriptPubKey == PlatformScript() && devTx2->vout[i].nValue == devFee) {
                     foundDevFee = true;
-                    LogPrint(BCLog::VALIDATION, "Validation::devFee found in POW block\n");
+                    LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee found in POW block\n");
                     break;
                 }
             }
         }
-        if (!foundDevFee && !sporkManager.IsSporkActive(Spork::SPORK_15_POS_DISABLED))
+        /* Exception blocks for devFee */
+        if (nBlockHeight >= 27673 && nBlockHeight <= 27698) {
+            foundDevFee = true;
+            LogPrint(BCLog::VALIDATION, "Validation::devFee exception block found\n");
+        }
+        if (!foundDevFee) {
+            LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee NOT found in block\n");
             return state.DoS(100, error("CheckBlock() : Coinbase does not pay to the platform"),
-                REJECT_INVALID, "bad-cb-reward-invalid");
+                 REJECT_INVALID, "bad-cb-reward-invalid");
+        }       
     }
+
 
     // Check transactions
     for (const auto& tx : block.vtx)
