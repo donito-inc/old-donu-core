@@ -3228,7 +3228,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
             for (size_t i = 0; i < devTx->vout.size(); i++) {
                 if (devTx->vout[i].scriptPubKey == PlatformScript() && devTx->vout[i].nValue == devFee) {
                     foundDevFee = true;
-                    LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee found in POS block\n");
+                    LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee found in POS block=%i\n", nBlockHeight);
                     break;
                 }
             }
@@ -3238,7 +3238,7 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
             for (size_t i = 0; i < devTx2->vout.size(); i++) {
                 if (devTx2->vout[i].scriptPubKey == PlatformScript() && devTx2->vout[i].nValue == devFee) {
                     foundDevFee = true;
-                    LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee found in POW block\n");
+                    LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee found in POW block=%i\n", nBlockHeight);
                     break;
                 }
             }
@@ -3246,10 +3246,10 @@ bool CheckBlock(const CBlock& block, CValidationState& state, const Consensus::P
         /* Exception blocks for devFee */
         if (nBlockHeight >= 27673 && nBlockHeight <= 27698) {
             foundDevFee = true;
-            LogPrint(BCLog::VALIDATION, "Validation::devFee exception block found\n");
+            LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee exception found in block=%i\n", nBlockHeight);
         }
         if (!foundDevFee) {
-            LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee NOT found in block\n");
+            LogPrint(BCLog::VALIDATION, "Validation CheckBlock::devFee NOT found in block=%i\n", nBlockHeight);
             return state.DoS(100, error("CheckBlock() : Coinbase does not pay to the platform"),
                  REJECT_INVALID, "bad-cb-reward-invalid");
         }       
