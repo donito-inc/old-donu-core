@@ -61,6 +61,7 @@ namespace BCLog {
         MNPAYMENTS   = (1 << 27),
         INSTANTSEND  = (1 << 28),
         PRIVATESEND  = (1 << 29),
+        VALIDATION   = (1 << 30),
         ALL          = ~(uint32_t)0,
     };
 

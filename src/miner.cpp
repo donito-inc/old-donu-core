@@ -165,7 +165,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CWallet *wallet, 
     nLastBlockTx = nBlockTx;
     nLastBlockWeight = nBlockWeight;
 
-    CAmount blockReward = GetBlockSubsidy(pindexPrev->nHeight, Params().GetConsensus()) - Params().GetEmissionsAmount();
+    CAmount blockReward = GetBlockSubsidy(pindexPrev->nHeight, Params().GetConsensus());
 
     // Create coinbase transaction.
     CMutableTransaction coinbaseTx;
@@ -173,24 +173,24 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CWallet *wallet, 
     coinbaseTx.vin[0].prevout.SetNull();
     coinbaseTx.vout.resize(1);
 
-    coinbaseTx.vout[0].scriptPubKey = PlatformScript();
-    coinbaseTx.vout[0].nValue = blockReward + nFees;
+    //coinbaseTx.vout[0].scriptPubKey = PlatformScript();
+    //coinbaseTx.vout[0].nValue = blockReward + nFees;
 
-    coinbaseTx.vout.emplace_back(Params().GetEmissionsAmount(), PlatformScript());
+    //coinbaseTx.vout.emplace_back(Params().GetEmissionsAmount(), PlatformScript());
 
     std::vector<const CWalletTx*> vwtxPrev;
 
     if(fProofOfStake && !sporkManager.IsSporkActive(Spork::SPORK_15_POS_DISABLED))
     {
         // POS Miner
-        LogPrintf("CreateNewBlock() : fProofOfStake && !sporkManager.IsSporkActive(Spork::SPORK_15_POS_DISABLED)) \n");
-        assert(wallet);
-        boost::this_thread::interruption_point();
-        pblock->nBits = GetNextWorkRequired(pindexPrev, chainparams.GetConsensus(), fProofOfStake);
-        CMutableTransaction coinstakeTx;
-        int64_t nSearchTime = pblock->nTime; // search to current time
+        //LogPrintf("CreateNewBlock() : fProofOfStake && !sporkManager.IsSporkActive(Spork::SPORK_15_POS_DISABLED)) \n");
+        //assert(wallet);
+        //boost::this_thread::interruption_point();
+        //pblock->nBits = GetNextWorkRequired(pindexPrev, chainparams.GetConsensus(), fProofOfStake);
+        //CMutableTransaction coinstakeTx;
+        //int64_t nSearchTime = pblock->nTime; // search to current time
         bool fStakeFound = false;
-        if (nSearchTime >= nLastCoinStakeSearchTime) {
+/*        if (nSearchTime >= nLastCoinStakeSearchTime) {
             unsigned int nTxNewTime = 0;
             if (wallet->CreateCoinStake(*wallet, pblock->nBits, blockReward,
                                         coinstakeTx, nTxNewTime,
@@ -207,7 +207,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CWallet *wallet, 
             nLastCoinStakeSearchInterval = nSearchTime - nLastCoinStakeSearchTime;
             nLastCoinStakeSearchTime = nSearchTime;
         }
-
+*/
         if (!fStakeFound)
             return nullptr;
     } else {
@@ -239,11 +239,11 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CWallet *wallet, 
             // 0: Miner
             // 1: Masternode
             // 2: Dev Fee
-            coinbaseTx.vout[0].nValue = blockReward + nFees - masternodePayment;
+            coinbaseTx.vout[0].nValue = Params().GetEmissionsAmount();
             coinbaseTx.vout[0].scriptPubKey = PlatformScript();
             coinbaseTx.vout[1].nValue = masternodePayment;
-	    coinbaseTx.vout[1].scriptPubKey = payee;
-            coinbaseTx.vout[2].nValue = Params().GetEmissionsAmount();
+	        coinbaseTx.vout[1].scriptPubKey = payee;
+            coinbaseTx.vout[2].nValue = blockReward + nFees - masternodePayment - Params().GetEmissionsAmount();
             coinbaseTx.vout[2].scriptPubKey = PlatformScript();
 
         } else {
@@ -253,7 +253,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CWallet *wallet, 
             // 0: Miner
             // 1: Dev Fee
 
-            coinbaseTx.vout[0].nValue = blockReward + nFees;
+            coinbaseTx.vout[0].nValue = blockReward + nFees - Params().GetEmissionsAmount();
             coinbaseTx.vout[0].scriptPubKey = PlatformScript();
             coinbaseTx.vout[1].nValue = Params().GetEmissionsAmount();
             coinbaseTx.vout[1].scriptPubKey = PlatformScript();
